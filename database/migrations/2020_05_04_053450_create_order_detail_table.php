@@ -14,9 +14,13 @@ class CreateOrderDetailTable extends Migration
     public function up()
     {
         Schema::create('order_detail', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('OrderID')->unsigned();
             $table->integer('ProID')->unsigned();
-            $table->primary(['OrderID', 'ProID']);
+            //tạo liên kết đến bảng orders
+            $table->foreign('OrderID')->references('OrderID')->on('orders')->onDelete('cascade');
+            //tạo liên kết đến bảng products
+            $table->foreign('ProID')->references('ProID')->on('products')->onDelete('cascade');
             $table->integer('OrdQuantity')->unsigned();
 
             $table->timestamps();

@@ -20,30 +20,30 @@
                                     <fieldset>
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="text" name="email" class="form-control">
+                                            <input type="text" name="email" class="form-control" placeholder="Nhập email" value="{{old('email')}}">
                                             {!! ShowError($errors,'email') !!}
                                         </div>
                                         <div class="form-group">
-                                            <label>password</label>
-                                            <input type="password" name="password" class="form-control">
+                                            <label>Mật khẩu</label>
+                                            <input type="password" name="password" class="form-control" placeholder="Mật khẩu tối thiểu 6 kí tự">
                                             {!! ShowError($errors,'password') !!}
 
                                         </div>
                                         <div class="form-group">
-                                            <label>Full name</label>
-                                            <input type="full" name="fullname" class="form-control">
+                                            <label>Họ Tên</label>
+                                            <input type="full" name="fullname" class="form-control" placeholder="Nhập họ tên" value="{{old('fullname')}}">
                                             {!! ShowError($errors,'fullname') !!}
 
                                         </div>
                                         <div class="form-group">
-                                            <label>Address</label>
-                                            <input type="address" name="address" class="form-control">
+                                            <label>Địa chỉ</label>
+                                            <input type="address" name="address" class="form-control" placeholder="Nhập địa chỉ" value="{{old('address')}}">
                                             {!! ShowError($errors,'address') !!}
 
                                         </div>
                                         <div class="form-group">
-                                            <label>Phone</label>
-                                            <input type="phone" name="phone" class="form-control">
+                                            <label>Số điện thoại</label>
+                                            <input type="phone" name="phone" class="form-control" placeholder="Nhập số điện thoại" value="{{old('phone')}}">
                                             {!! ShowError($errors,'phone') !!}
 
                                         </div>

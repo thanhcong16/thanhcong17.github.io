@@ -14,9 +14,13 @@ class CreateProductSizeTable extends Migration
     public function up()
     {
         Schema::create('product_size', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('SizeID')->unsigned();
             $table->integer('ProID')->unsigned();
-            $table->primary(['SizeID', 'ProID']);
+            //tạo liên kết với bảng size
+            $table->foreign('SizeID')->references('SizeID')->on('size')->onDelete('cascade');
+            //tạo liên kết với bảng product
+            $table->foreign('ProID')->references('ProID')->on('products')->onDelete('cascade');
 
 
             $table->timestamps();

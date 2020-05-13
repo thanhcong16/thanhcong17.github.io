@@ -87,6 +87,8 @@ use Illuminate\Support\Facades\Route;
         //product
         Route::group(['prefix' => 'product'], function () {
             Route::get('add', 'backend\ProductController@GetAddProduct');
+            Route::post('add', 'backend\ProductController@PostAddProduct');
+
             Route::get('edit', 'backend\ProductController@GetEditProduct');
             Route::get('', 'backend\ProductController@GetListProduct');
         });
@@ -105,7 +107,13 @@ use Illuminate\Support\Facades\Route;
         //category
         Route::group(['prefix' => 'category'], function () {
             Route::get('', 'backend\CategoryController@GetCategory');
-            Route::get('edit', 'backend\CategoryController@GetEditCategory');
+            Route::post('', 'backend\CategoryController@PostCategory');
+
+            Route::get('edit/{id_categorys}', 'backend\CategoryController@GetEditCategory')->name('edit');
+            Route::post('edit/{id_categorys}', 'backend\CategoryController@PostEditCategory');
+
+            Route::get('del/{id_categorys}', 'backend\CategoryController@DelCategory');
+
         });
 
 
