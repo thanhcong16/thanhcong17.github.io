@@ -27,10 +27,10 @@
 											<div class="panel panel-blue">
 												<div class="panel-heading dark-overlay">Thông tin khách hàng</div>
 												<div class="panel-body">
-													<strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span> : Nguyễn thế phúc</strong> <br>
-													<strong><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> : Số điện thoại: 0356653300</strong>
+													<strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span> : {{ $order->OrderCustomer }}</strong> <br>
+													<strong><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> : Số điện thoại: {{ $order->OrderPhone }}</strong>
 													<br>
-													<strong><span class="glyphicon glyphicon-send" aria-hidden="true"></span> : Thường tín</strong>
+													<strong><span class="glyphicon glyphicon-send" aria-hidden="true"></span> : {{ $order->OrderAddress }}</strong>
 												</div>
 											</div>
 										</div>
@@ -49,43 +49,31 @@
 										</tr>
 									</thead>
 									<tbody>
+                                        @foreach ($order->products as $prd)
+
+
 										<tr>
-											<td>1</td>
+											<td>{{ $prd->ProID}}</td>
 											<td>
 												<div class="row">
 													<div class="col-md-4">
-														<img width="100px" src="img/ao-khoac.jpg" class="thumbnail">
+														<img width="100px" src="img/{{$prd->ProImg}}" class="thumbnail">
 													</div>
 													<div class="col-md-8">
-														<p><b>Mã sản phẩm</b>: SP01</p>
-														<p><b>Tên Sản phẩm</b>: Áo Khoác Bomber Nỉ Xanh Lá Cây AK179</p>
-														<p><b>Số lương</b> : 2</p>
+														<p><b>Mã sản phẩm</b>: {{ $prd->ProCode }}</p>
+														<p><b>Tên Sản phẩm</b>: {{ $prd->ProName }}</p>
+														<p><b>Số lương</b> : {{ $prd->pivot->OrdQuantity }}</p>
 													</div>
 												</div>
 											</td>
-											<td>500.000 VNĐ</td>
-											<td>1.000.000 VNĐ</td>
+											<td>{{ number_format($prd->ProPrice,0,"",",") }} đ</td>
+											<td>{{ number_format($prd->ProPrice * $prd->pivot->OrdQuantity,0,"",",") }} đ</td>
 
 										</tr>
-										<tr>
-											<td>1</td>
-											<td>
-												<div class="row">
-													<div class="col-md-4">
-														<img width="100px" src="img/ao-khoac.jpg" class="thumbnail">
-													</div>
-													<div class="col-md-8">
-														<p><b>Mã sản phẩm</b>: SP02</p>
-														<p><b>Tên Sản phẩm</b>: Áo Khoác Bomber Nỉ Xanh Lá Cây AK179</p>
-														<p><b>Số lương</b> : 1</p>
-													</div>
-												</div>
-											</td>
-											<td>500.000 VNĐ</td>
-											<td>500.000 VNĐ</td>
+                                        @endforeach
 
-										</tr>
-									
+
+
 									</tbody>
 
 								</table>
@@ -96,17 +84,20 @@
 												<h4 align='right'>Tổng Tiền :</h4>
 											</th>
 											<th>
-												<h4 align='right' style="color: brown;">1.500.000 VNĐ</h4>
+												<h4 align='right' style="color: brown;">{{number_format($total->total,0,"",",")}} đ</h4>
 											</th>
 
 										</tr>
 									</thead>
 									<tbody>
 									</tbody>
-								</table>
-								<div class="alert alert-primary" role="alert" align='right'>
-									<a name="" id="" class="btn btn-success" href="#" role="button">Đã xử lý</a>
-								</div>
+                                </table>
+                                @if ($order->OrderStatus==0)
+                                    <div class="alert alert-primary" role="alert" align='right'>
+                                        <a onclick="return Proccessed()" class="btn btn-success" href="/admin/order/paid/{{$order->OrderID}}" role="button">Đã xử lý</a>
+                                    </div>
+                                @endif
+
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -119,4 +110,14 @@
 
 	</div>
 	<!--end main-->
+@endsection
+
+@section('script')
+@parent
+    <script>
+        function Proccessed()
+        {
+            return confirm("Bạn có muốn xử lí đơn hàng này?")
+        }
+    </script>
 @endsection

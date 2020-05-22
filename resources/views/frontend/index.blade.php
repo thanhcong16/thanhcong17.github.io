@@ -1,7 +1,7 @@
 @extends('frontend.master.master')
 @section('title','Trang chủ')
 @section('content')
-	
+
 	<!-- main -->
 	<div id="colorlib-featured-product">
 			<div class="container">
@@ -346,4 +346,3 @@
 
 @endsection
 
-		

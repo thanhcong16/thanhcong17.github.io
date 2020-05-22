@@ -39,13 +39,13 @@
 
                                             </div>
                                             <div class="form-group">
-                                            <div>
-                                                <label>Size: </label>
-                                                    {{GetProductSize($size)}}
-                                                    {!! ShowError($errors,'size') !!}
+                                                <div>
+                                                    <label>Size: </label>
+                                                        {{GetProductSize($size)}}
+                                                        {!! ShowError($errors,'size') !!}
 
 
-                                            </div>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Giá sản phẩm (Giá chung)</label>

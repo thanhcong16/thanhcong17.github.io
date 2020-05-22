@@ -3,18 +3,18 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class products extends Model
 {
+    use SoftDeletes;
     protected $table = 'products';
 
-    protected $fillable = [
-        'ProCode','ProName','ProSlug','ProPrice','ProFeatured','ProStatus','ProInfo','ProImg','CateID'
-    ];
+
     protected $primaryKey = 'ProID';
     public function categorys()
     {
-        return $this->belongsTo('App\models\categorys', 'CateID', 'CateID');
+        return $this->belongsTo('App\models\categorys', 'CateID', 'CateID')->withTrashed();
     }
     public function size()
     {

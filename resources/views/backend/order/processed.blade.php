@@ -15,43 +15,50 @@
 		<!--/.row-->
 		<div class="row">
 			<div class="col-xs-12 col-md-12 col-lg-12">
-
+                @if (session('thongbao'))
+                    <div class="alert bg-success" role="alert">
+                        <svg class="glyph stroked checkmark">
+                            <use xlink:href="#stroked-checkmark"></use>
+                        </svg>{{ session('thongbao') }}<a href="/admin/order/processed" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                    </div>
+                @endif
 				<div class="panel panel-primary">
 					<div class="panel-heading">Danh sách đơn đặt hàng đã xử lý</div>
 					<div class="panel-body">
 						<div class="bootstrap-table">
 							<div class="table-responsive">
-								<a href="#" class="btn btn-warning"><span class="glyphicon glyphicon-gift"></span>Đơn Chưa xử lý</a>
-								<table class="table table-bordered" style="margin-top:20px;">				
+								<a href="/admin/order" class="btn btn-warning"><span class="glyphicon glyphicon-gift"></span>Đơn Chưa xử lý</a>
+								<table class="table table-bordered" style="margin-top:20px;">
                                     <thead>
                                         <tr class="bg-primary">
                                             <th>ID</th>
                                             <th>Tên khách hàng</th>
-                                            <th>Email</th>
+
                                             <th>Sđt</th>
                                             <th>Địa chỉ</th>
                                             <th>Thời gian</th>
+                                            <th>Thông tin</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($orders as $row)
                                         <tr>
-                                            <td>2</td>
-                                            <td>Nguyễn văn An</td>
-                                            <td>Lu@gmail.com</td>
-                                            <td>015232412</td>
-                                            <td>Bắc ninh</td>
-                                            <td>2018-12-06 12:17:17</td>
+                                            <td>{{ $row->OrderID }}</td>
+                                            <td>{{ $row->OrderCustomer }}</td>
+
+                                            <td>{{ $row->OrderPhone }}</td>
+                                            <td>{{ $row->OrderAddress }}</td>
+                                            <td>{{ $row->updated_at }}</td>
+                                            <td><a class="btn btn-primary" href="/admin/order/detail/{{ $row->OrderID }}" role="button">Chi tiết</a></td>
+
                                         </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Nguyễn thế phúc</td>
-                                            <td>admin@gmail.com</td>
-                                            <td>0906013526</td>
-                                            <td>Thường tín , hà nội</td>
-                                            <td>2018-12-06 02:05:30</td>                                                                                
-                                        </tr>
+                                        @endforeach
+
                                     </tbody>
                                 </table>
+                                <div align='right'>
+                                    {{ $orders->links() }}
+                                </div>
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -66,4 +73,3 @@
 	<!--end main-->
 
 @endsection
-	

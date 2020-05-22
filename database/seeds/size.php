@@ -14,10 +14,11 @@ class size extends Seeder
     {
         DB::table('size')->delete();
         DB::table('size')->insert([
-            ['SizeID'=>1,'SizeType'=>'M'],
-            ['SizeID'=>2,'SizeType'=>'L'],
-            ['SizeID'=>3,'SizeType'=>'XL'],
-            ['SizeID'=>4,'SizeType'=>'XXL'],
+            ['SizeID'=>1,'SizeType'=>'S'],
+            ['SizeID'=>2,'SizeType'=>'M'],
+            ['SizeID'=>3,'SizeType'=>'L'],
+            ['SizeID'=>4,'SizeType'=>'XL'],
+            ['SizeID'=>5,'SizeType'=>'XXL'],
 
         ]);
     }

@@ -9,6 +9,12 @@ function ShowError($errors,$name){
             ';
     }
 }
+//set-active
+function SetActive($path) {
+
+    return call_user_func_array('Request::is', (array)$path) ? 'active' : '';
+
+}
 
 //Categorys
 
@@ -99,3 +105,34 @@ function GetProductSize($mang)
     }
 
 }
+
+function ShowProductSize($mang1,$mang2)
+{
+    $array=[];
+	foreach($mang2 as $key=>$val )
+	{
+		$array[]= $val['SizeID'];
+	}
+    foreach($mang1 as $value1){
+        if(in_array($value1['SizeID'], $array))
+        {
+            echo '
+            <label style="margin-left:20px;" for=""><input type="checkbox" value="'.$value1['SizeID'].'" name="size[]" checked class="">'.$value1['SizeType'].'</label>
+            ';
+        }
+        else
+        {
+            echo '
+            <label style="margin-left:20px;" for=""><input type="checkbox" value="'.$value1['SizeID'].'" name="size[]"  class="">'.$value1['SizeType'].'</label>
+            ';
+        }
+
+    }
+
+}
+
+// //Complete
+// function SumMoney(Type $var = null)
+// {
+//     # code...
+// }

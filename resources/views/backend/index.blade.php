@@ -21,15 +21,15 @@
 		</div>
 		<!--/.row-->
 		<div class="row">
-			<div class="col-xs-12 col-md-12 col-lg-9">
+			<div class="col-xs-12 col-md-12 col-lg-6">
 				<div class="panel panel-blue panel-widget ">
 					<div class="row no-padding">
 						<div class="col-sm-3 col-lg-4 widget-left">
 							<span class="glyphicon glyphicon-signal icon-50" aria-hidden="true"></span>
 						</div>
 						<div class="col-sm-9 col-lg-8 widget-right">
-							<div class="large">8.000.000 đ</div>
-							<div class="text-muted">Doanh thu tháng 7</div>
+							<div class="large">{{ number_format($dl['Tháng '.count($dl)],0,"",",") }} đ</div>
+							<div class="text-muted">Doanh thu tháng {{ count($dl) }}</div>
 						</div>
 					</div>
 				</div>
@@ -44,8 +44,23 @@
 							</svg>
 						</div>
 						<div class="col-sm-9 col-lg-7 widget-right">
-							<div class="large">24</div>
-							<div class="text-muted">Số đơn hàng</div>
+							<div class="large">{{ $paid }}</div>
+							<div class="text-muted">Đơn hàng đã xử lí</div>
+						</div>
+					</div>
+				</div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-teal panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked male-user">
+								<use xlink:href="#stroked-male-user"></use>
+							</svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">{{ $number }}</div>
+							<div class="text-muted">Đơn hàng chưa xử lí</div>
 						</div>
 					</div>
 				</div>
@@ -72,4 +87,57 @@
 	<!--end main-->
 @endsection
 
-	
+@section('script')
+@parent
+<script>
+    var lineChartData = {
+        labels: [
+            @foreach($dl as $key=>$value)
+            "{{$key}}",
+            @endforeach
+
+        ],
+        datasets: [
+
+            {
+                label: "My Second dataset",
+                fillColor: "rgba(48, 164, 255, 0.2)",
+                strokeColor: "rgba(48, 164, 255, 1)",
+                pointColor: "rgba(48, 164, 255, 1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(48, 164, 255, 1)",
+                data: [
+                    @foreach($dl as $value)
+                        "{{$value}}",
+                    @endforeach
+
+
+                ]
+            }
+        ]
+
+    }
+
+    window.onload = function() {
+        var chart1 = document.getElementById("line-chart").getContext("2d");
+        window.myLine = new Chart(chart1).Line(lineChartData, {
+            responsive: true
+        });
+        var chart2 = document.getElementById("bar-chart").getContext("2d");
+        window.myBar = new Chart(chart2).Bar(barChartData, {
+            responsive: true
+        });
+        var chart3 = document.getElementById("doughnut-chart").getContext("2d");
+        window.myDoughnut = new Chart(chart3).Doughnut(doughnutData, {
+            responsive: true
+        });
+        var chart4 = document.getElementById("pie-chart").getContext("2d");
+        window.myPie = new Chart(chart4).Pie(pieData, {
+            responsive: true
+        });
+
+    };
+
+</script>
+@endsection

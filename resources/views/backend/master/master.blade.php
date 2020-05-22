@@ -8,7 +8,7 @@
     <base href="{{asset("")."backend/"}}">
 	<!-- css -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	
+
 	<link href="css/styles.css" rel="stylesheet">
 	<!--Icons-->
 	<script src="js/lumino.glyphs.js"></script>
@@ -20,7 +20,7 @@
 	<!-- header -->
 	<!-- sidebar left-->
 	@include('backend.master.sidebar')
-	
+
 	<!--/. end sidebar left-->
 	<!--main-->
 
@@ -32,7 +32,6 @@
 		<script src="js/jquery-1.11.1.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/chart.min.js"></script>
-		<script src="js/chart-data.js"></script>
 	@show
 
 </body>

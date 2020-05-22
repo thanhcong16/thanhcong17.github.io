@@ -32,7 +32,7 @@
                                     <div class="alert bg-success" role="alert">
                                         <svg class="glyph stroked checkmark">
                                             <use xlink:href="#stroked-checkmark"></use>
-                                        </svg>{{ session('thongbao') }}<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                        </svg>{{ session('thongbao') }}<a href="/admin/product" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
                                     </div>
                                 @endif
 								<a href="/admin/product/add" class="btn btn-primary">Thêm sản phẩm</a>
@@ -75,15 +75,15 @@
                                                 <td>{{number_format($row->ProPrice,0,"","")}} VND</td>
                                                 <td>
                                                     @if ($row->ProStatus == 0)
-                                                        <a class="btn btn-danger" href="#" role="button">Hết hàng</a>
+                                                        <a class="btn btn-danger" href="/admin/product" role="button">Hết hàng</a>
                                                     @else
-                                                        <a class="btn btn-success" href="#" role="button">Còn hàng</a>
+                                                        <a class="btn btn-success" href="/admin/product" role="button">Còn hàng</a>
                                                     @endif
                                                 </td>
                                                 <td>{{$row->categorys->CateName}}</td>
                                                 <td>
-                                                    <a href="/admin/product/edit" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a>
-                                                    <a href="#" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
+                                                    <a href="/admin/product/edit/{{$row->ProID}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a>
+                                                    <a onclick="return DelProduct('{{$row->ProCode}}')" href="/admin/product/del/{{$row->ProID}}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
                                                 </td>
                                             </tr>
 
@@ -105,5 +105,17 @@
 		</div>
 	</div>
 	<!--end main-->
+
+@endsection
+
+
+@section('script')
+@parent
+    <script>
+        function DelProduct($prd_code)
+        {
+            return confirm("Bạn có muốn xóa sản phẩm có mã : " +$prd_code);
+        }
+    </script>
 
 @endsection

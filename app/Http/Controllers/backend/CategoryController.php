@@ -60,7 +60,7 @@ class CategoryController extends Controller
         $cate=categorys::find($id_categorys);
 
         categorys::where('CateParent',$id_categorys)->update(['CateParent'=>$cate->CateParent]);
-        categorys::destroy($id_categorys);
+        categorys::find($id_categorys)->delete();
         return redirect()->back()->with('thongbao','Đã xóa danh mục thành công');
 
     }

@@ -22,7 +22,7 @@
 						<div class="bootstrap-table">
 							<div class="table-responsive">
 
-								<a href="processed.html" class="btn btn-success">Đơn đã xử lý</a>
+								<a href="/admin/order/processed" class="btn btn-success">Đơn đã xử lý</a>
 								<table class="table table-bordered" style="margin-top:20px;">
 									<thead>
 										<tr class="bg-primary">
@@ -35,22 +35,29 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>1</td>
-											<td>Nguyễn Thế Phúc</td>
-											<td>0356653300</td>
-											<td>Thường tín</td>
-											<td>
-												<a href="detailorder.html" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Xử lý</a>
+                                        @foreach ($orders as $row)
+                                            <tr>
+                                                <td>{{ $row->OrderID }}</td>
+                                                <td>{{ $row->OrderCustomer }}</td>
+                                                <td>{{ $row->OrderPhone }}</td>
+                                                <td>{{ $row->OrderAddress }}</td>
+                                                <td>
+                                                    <a href="/admin/order/detail/{{ $row->OrderID}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Xử lý</a>
 
-											</td>
-										</tr>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
 
 									</tbody>
-								</table>
+                                </table>
+                                <div align="right">
+                                    {{ $orders->links() }}
+                                </div>
 							</div>
 						</div>
-						<div class="clearfix"></div>
+                        <div class="clearfix"></div>
+
 					</div>
 				</div>
 			</div>

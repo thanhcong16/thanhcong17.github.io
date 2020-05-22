@@ -9,8 +9,8 @@
 						</div>
 						<div class="col-xs-10 text-right menu-1">
 							<ul>
-								<li class="active"><a href="/">Trang chủ</a></li>
-								<li class="has-dropdown">
+								<li class="{{SetActive(['/'])}}"><a href="/">Trang chủ</a></li>
+								<li class="has-dropdown {{SetActive(['product*'])}}">
 									<a href="/product">Cửa hàng</a>
 									<ul class="dropdown">
 										<li><a href="/cart">Giỏ hàng</a></li>
@@ -22,8 +22,8 @@
                                     <li><a href="/admin">Quản lí</a></li>
                                 @endif
 
-                                <li><a href="/contact">Liên hệ</a></li>
-                                <li class="has-dropdown">
+                                <li class="{{SetActive(['contact*'])}}"><a href="/contact">Liên hệ</a></li>
+                                <li class="has-dropdown {{SetActive(['login*'])}} {{SetActive(['member*'])}}">
                                     <a href="@if (Auth::check())
                                                     /member/{{Auth::user()->id}}
                                             @else
@@ -38,7 +38,7 @@
                                     @if (Auth::check())
 
                                         <ul class="dropdown">
-                                            <li><a href="/member/{{Auth::user()->id}}">Thông tin cá nhân</a></li>
+                                            <li ><a href="/member/{{Auth::user()->id}}">Thông tin cá nhân</a></li>
                                             <li><a href="/member/editpassword/{{Auth::user()->id}}">Đổi mật khẩu</a></li>
                                             <li><a href="/member/logout/{{Auth::user()->id}}">Đăng xuất</a></li>
 
@@ -54,7 +54,7 @@
                                     @endif
 
 								</li>
-								<li><a href="/cart"><i class="icon-shopping-cart"></i> Giỏ hàng [0]</a></li>
+								<li class="{{SetActive(['cart*'])}}"><a href="/cart"><i class="icon-shopping-cart"></i> Giỏ hàng [0]</a></li>
 							</ul>
 						</div>
 					</div>

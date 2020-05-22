@@ -28,62 +28,53 @@
 					<div class="panel-body">
 						<div class="bootstrap-table">
 							<div class="table-responsive">
-								<div class="alert bg-success" role="alert">
-									<svg class="glyph stroked checkmark">
-										<use xlink:href="#stroked-checkmark"></use>
-									</svg>Đã thêm thành công<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-								</div>
-								<a href="adduser.html" class="btn btn-primary">Thêm Thành viên</a>
+								@if (session('thongbao'))
+                                    <div class="alert bg-success" role="alert">
+                                        <svg class="glyph stroked checkmark">
+                                            <use xlink:href="#stroked-checkmark"></use>
+                                        </svg>{{session('thongbao')}}<a href="/admin/user" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                    </div>
+                                @endif
+								<a href="/admin/user/add" class="btn btn-primary">Thêm Thành viên</a>
 								<table class="table table-bordered" style="margin-top:20px;">
 
 									<thead>
 										<tr class="bg-primary">
 											<th>ID</th>
 											<th>Email</th>
-											<th>Full</th>
-											<th>Address</th>
-                                            <th>Phone</th>
-                                            <th>Level</th>
+											<th>Họ tên</th>
+											<th width="20%">Địa chỉ</th>
+                                            <th>Số điện thoại</th>
+                                            <th>Cấp quyền</th>
 											<th width='18%'>Tùy chọn</th>
 										</tr>
 									</thead>
 									<tbody>
-									
+                                        @foreach ($user as $row)
+
 										<tr>
-											<td>1</td>
-											<td>Admin@gmail.com</td>
-											<td>Nguyễn thế phúc</td>
-											<td>Thường tín</td>
-                                            <td>0356653300</td>
-                                            <td>1</td>
+											<td>{{$row->id}}</td>
+											<td>{{$row->email}}</td>
+											<td>{{$row->fullname}}</td>
+											<td>{{$row->address}}</td>
+                                            <td>{{$row->phone}}</td>
+                                            <td>
+                                                @if ($row->level==2)
+                                                    <b>Admin</b>
+                                                @else
+                                                    <b>Member</b>
+                                                @endif
+                                            </td>
 											<td>
-												<a href="#" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a>
-												<a href="#" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
+												<a href="/admin/user/edit/{{$row->id}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a>
+												<a onclick="return Del_User('{{$row->fullname}}')" href="/admin/user/del/{{$row->id}}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
 											</td>
                                         </tr>
-                                        <tr>
-											<td>1</td>
-											<td>Admin@gmail.com</td>
-											<td>Nguyễn thế phúc</td>
-											<td>Thường tín</td>
-                                            <td>0356653300</td>
-                                            <td>1</td>
-											<td>
-												<a href="#" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a>
-												<a href="#" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
-											</td>
-										</tr>
-								
+                                        @endforeach
 									</tbody>
 								</table>
 								<div align='right'>
-									<ul class="pagination">
-										<li class="page-item"><a class="page-link" href="#">Trở lại</a></li>
-										<li class="page-item"><a class="page-link" href="#">1</a></li>
-										<li class="page-item"><a class="page-link" href="#">2</a></li>
-										<li class="page-item"><a class="page-link" href="#">3</a></li>
-										<li class="page-item"><a class="page-link" href="#">tiếp theo</a></li>
-									</ul>
+									{{$user->links()}}
 								</div>
 							</div>
 							<div class="clearfix"></div>
@@ -100,4 +91,12 @@
 	<!--end main-->
 @endsection
 
-			
+@section('script')
+@parent
+    <script>
+        function Del_User($name)
+        {
+            return confirm("Bạn có muốn xóa thành viên \" " +$name + " \" không?");
+        }
+    </script>
+@endsection

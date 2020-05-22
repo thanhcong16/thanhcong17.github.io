@@ -89,18 +89,27 @@ use Illuminate\Support\Facades\Route;
             Route::get('add', 'backend\ProductController@GetAddProduct');
             Route::post('add', 'backend\ProductController@PostAddProduct');
 
-            Route::get('edit', 'backend\ProductController@GetEditProduct');
+            Route::get('edit/{id_product}', 'backend\ProductController@GetEditProduct');
+            Route::post('edit/{id_product}', 'backend\ProductController@PostEditProduct');
+            Route::get('del/{id_product}', 'backend\ProductController@DelProduct');
+
             Route::get('', 'backend\ProductController@GetListProduct');
         });
         //user
         Route::group(['prefix' => 'user'], function () {
             Route::get('add', 'backend\UserController@GetAddUser');
-            Route::get('edit', 'backend\UserController@GetEditUser');
+            Route::post('add', 'backend\UserController@PostAddUser');
+            Route::get('edit/{id_user}', 'backend\UserController@GetEditUser');
+            Route::post('edit/{id_user}', 'backend\UserController@PostEditUser');
+            Route::get('del/{id_user}', 'backend\UserController@DelUser');
+
             Route::get('', 'backend\UserController@GetListUser');
         });
         //order
         Route::group(['prefix' => 'order'], function () {
-            Route::get('detail', 'backend\OrderController@GetDetailOrder');
+            Route::get('detail/{id_order}', 'backend\OrderController@GetDetailOrder');
+            Route::get('paid/{id_order}', 'backend\OrderController@Paid');
+
             Route::get('', 'backend\OrderController@GetOrder');
             Route::get('processed', 'backend\OrderController@GetProcessed');
         });
@@ -109,13 +118,19 @@ use Illuminate\Support\Facades\Route;
             Route::get('', 'backend\CategoryController@GetCategory');
             Route::post('', 'backend\CategoryController@PostCategory');
 
-            Route::get('edit/{id_categorys}', 'backend\CategoryController@GetEditCategory')->name('edit');
+            Route::get('edit/{id_categorys}', 'backend\CategoryController@GetEditCategory');
             Route::post('edit/{id_categorys}', 'backend\CategoryController@PostEditCategory');
 
             Route::get('del/{id_categorys}', 'backend\CategoryController@DelCategory');
 
         });
+        //feedback
+        Route::group(['prefix' => 'feedback'], function () {
+            Route::get('', 'backend\FeedbackController@GetFeedback');
+            Route::get('/{id_feedback}', 'backend\FeedbackController@ShowHide');
+            Route::get('del/{id_feedback}', 'backend\FeedbackController@Del');
 
+        });
 
     });
 
