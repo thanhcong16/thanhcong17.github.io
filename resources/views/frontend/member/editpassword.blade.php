@@ -12,7 +12,7 @@
                                     <strong>{{ session('thongbao')}}</strong>
                                 </div>
                             @endif
-                            <div class="panel-heading">Thay đổi mật khẩu</div>
+                            <div class="panel-name">Thay đổi mật khẩu</div>
                             <div class="panel-body">
                                 <form role="form" method="Post">
                                     @csrf

@@ -11,5 +11,8 @@ class categorys extends Model
     protected $table = "categorys";
     protected $primaryKey = 'CateID';
 
-
+    public function prd()
+    {
+        return $this->hasMany('App\models\products', 'CateID', 'CateID');
+    }
 }

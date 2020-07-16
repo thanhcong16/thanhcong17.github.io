@@ -27,27 +27,27 @@
 						<span class="icon"><i class="icon-shopping-cart"></i></span>
 						<h2>Cảm ơn bạn đã mua hàng, Đơn hàng của bạn đã đặt thành công</h2>
 						<p>
-							<a href="index.html" class="btn btn-primary">Trang chủ</a>
-							<a href="shop.html" class="btn btn-primary btn-outline">Tiếp tục mua sắm</a>
+							<a href="/" class="btn btn-primary">Trang chủ</a>
+							<a href="/product" class="btn btn-primary btn-outline">Tiếp tục mua sắm</a>
 						</p>
 					</div>
 				</div>
 				<div class="row mt-50">
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<h3 class="billing-title mt-20 pl-15">Thông tin đơn hàng</h3>
 						<table class="order-rable">
 							<tbody>
-								<tr>
-									<td>Đơn hàng số</td>
-									<td>: 60235</td>
+                                <tr>
+									<td>Đơn hàng số</td>
+									<td>: {{ $order->OrderID }}</td>
 								</tr>
 								<tr>
 									<td>Ngày mua</td>
-									<td>: Oct 03, 2017</td>
+									<td>: {{ Carbon\Carbon::parse($order->created_at)->format("d-m-Y") }}</td>
 								</tr>
 								<tr>
 									<td>Tổng tiền</td>
-									<td>: ₫ 4.000.000</td>
+									<td>: {{ number_format($total->total,0,"",",") }} ₫ </td>
 								</tr>
 								<tr>
 									<td>Phương thức thanh toán</td>
@@ -56,52 +56,27 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="col-md-4">
-						<h3 class="billing-title mt-20 pl-15">Địa chỉ thanh toán</h3>
-						<table class="order-rable">
+					<div class="col-md-6">
+						<h3 align='right' class="billing-title mt-20 pl-15">Địa chỉ thanh toán</h3>
+						<table align='right' class="order-rable">
 							<tbody>
 								<tr>
 									<td>Họ Tên</td>
-									<td>: Nguyễn Văn A</td>
+									<td>: {{ $order->OrderCustomer}}</td>
 								</tr>
 								<tr>
 									<td>Số điện thoại</td>
-									<td>: 0123 456 789</td>
+									<td>: {{ $order->OrderPhone }}</td>
 								</tr>
 								<tr>
 									<td>Địa chỉ</td>
-									<td>: Số 55 Giải Phóng, quận Hai Bà Trưng, Hà Nội, Việt Nam </td>
+									<td>: {{ $order->OrderAddress }} </td>
 								</tr>
-								<tr>
-									<td>Thành Phố</td>
-									<td>: Hà Nội</td>
-								</tr>
+
 							</tbody>
 						</table>
 					</div>
-					<div class="col-md-4">
-						<h3 class="billing-title mt-20 pl-15">Địa chỉ giao hàng</h3>
-						<table class="order-rable">
-							<tbody>
-								<tr>
-									<td>Họ Tên</td>
-									<td>: Nguyễn Văn A</td>
-								</tr>
-								<tr>
-									<td>Số điện thoại</td>
-									<td>: 0123 456 789</td>
-								</tr>
-								<tr>
-									<td>Địa chỉ</td>
-									<td>: Số 55 Giải Phóng, quận Hai Bà Trưng, Hà Nội, Việt Nam </td>
-								</tr>
-								<tr>
-									<td>Thành Phố</td>
-									<td>: Hà Nội</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+
 				</div>
 			</div>
 			<div class="container">
@@ -110,33 +85,32 @@
 						<div class="col-12">
 							<div class="order-wrapper mt-50">
 								<h3 class="billing-title mb-10">Hóa đơn</h3>
-								<div class="order-list">
-									<div class="list-row d-flex justify-content-between">
-										<div class="col-md-4">SẢN PHẨM</div>
 
-										<div class="col-md-4 offset-md-4" align='right'>TỔNG CỘNG</div>
-									</div>
-									<div class="list-row d-flex justify-content-between">
-										<div class="col-md-4">Sản phẩm 1 : color:red ,size:XL</div>
-										<div class="col-md-4" align='right'>x 02</div>
-										<div class="col-md-4" align='right'>₫ 720.000</div>
+                                <div class="order-list">
+                                    <div class="list-row d-flex justify-content-between">
+                                        <div class="col-md-4">SẢN PHẨM</div>
 
-									</div>
+                                        <div class="col-md-4 offset-md-4" align='right'>TỔNG CỘNG</div>
+                                    </div>
+                                    @foreach ($order->products as $row)
+                                        <div class="list-row d-flex justify-content-between">
+                                            <div class="col-md-3"><img class="img-thumbnail cart-img-complete" src="/backend/img/{{ $row->ProImg }}"></div>
 
-									<div class="list-row d-flex justify-content-between">
-										<div class="col-md-4">Sản phẩm 1 : color:red ,size:XL</div>
-										<div class="col-md-4" align='right'>x 02</div>
-										<div class="col-md-4" align='right'>₫ 720.000</div>
+                                            <div class="col-md-3">{{ $row->ProName}}, size: {{ $row->pivot->OrdSize }}</div>
+                                            <div class="col-md-3" align='right'>x {{ $row->pivot->OrdQuantity }}</div>
+                                            <div class="col-md-3" align='right'>{{ number_format($row->ProPrice * $row->pivot->OrdQuantity,0,"",",") }} ₫</div>
 
-									</div>
+                                        </div>
+                                    @endforeach
 
-									<div class="list-row border-bottom-0 d-flex justify-content-between">
-										<div class="col-md-4">
-											<h6>Tổng</h6>
-										</div>
-										<div class="col-md-4 offset-md-4" align='right'>₫ 1.420.000</div>
-									</div>
-								</div>
+                                    <div class="list-row border-bottom-0 d-flex justify-content-between">
+                                        <div class="col-md-4">
+                                            <h3>Tổng</h3>
+                                        </div>
+                                        <div class="col-md-4 offset-md-4" align='right'>{{ number_format($total->total,0,"",",") }} ₫</div>
+                                    </div>
+
+                                </div>
 							</div>
 						</div>
 					</div>

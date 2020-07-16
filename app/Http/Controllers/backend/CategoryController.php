@@ -46,7 +46,16 @@ class CategoryController extends Controller
             return redirect()->back()->with('error','Giao diện web không hỗ trợ Danh mục lớn hơn 2 cấp.');
 
         }
+        if($r->parent==$id_categorys){
+            return redirect()->back()->with('error','Danh mục cha và tên danh mục trùng nhau.');
+
+        }
+        if(categorys::all()->where('CateParent',$id_categorys)->count()>0){
+            return redirect()->back()->with('error','Giao diện web không hỗ trợ Danh mục lớn hơn 2 cấp.');
+
+        };
         $cate=categorys::find($id_categorys);
+
         $cate->CateName=$r->name;
         $cate->CateSlug=Str::slug($r->name);
         $cate->CateParent=$r->parent;

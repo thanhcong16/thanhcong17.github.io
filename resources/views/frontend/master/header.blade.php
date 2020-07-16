@@ -11,12 +11,8 @@
 							<ul>
 								<li class="{{SetActive(['/'])}}"><a href="/">Trang chủ</a></li>
 								<li class="has-dropdown {{SetActive(['product*'])}}">
-									<a href="/product">Cửa hàng</a>
-									<ul class="dropdown">
-										<li><a href="/cart">Giỏ hàng</a></li>
-										<li><a href="/checkout/complete">Thanh toán</a></li>
+									<a href="/product">Sản phẩm</a>
 
-									</ul>
                                 </li>
                                 @if (Auth::check() && Auth::user()->level ==2)
                                     <li><a href="/admin">Quản lí</a></li>
@@ -25,7 +21,7 @@
                                 <li class="{{SetActive(['contact*'])}}"><a href="/contact">Liên hệ</a></li>
                                 <li class="has-dropdown {{SetActive(['login*'])}} {{SetActive(['member*'])}}">
                                     <a href="@if (Auth::check())
-                                                    /member/{{Auth::user()->id}}
+                                                    /member/info-edit
                                             @else
                                                     /login
                                             @endif">
@@ -38,9 +34,10 @@
                                     @if (Auth::check())
 
                                         <ul class="dropdown">
-                                            <li ><a href="/member/{{Auth::user()->id}}">Thông tin cá nhân</a></li>
-                                            <li><a href="/member/editpassword/{{Auth::user()->id}}">Đổi mật khẩu</a></li>
-                                            <li><a href="/member/logout/{{Auth::user()->id}}">Đăng xuất</a></li>
+                                            <li ><a href="/member/info-edit">Thông tin cá nhân</a></li>
+                                            <li><a href="/member/editpassword/info-edit">Đổi mật khẩu</a></li>
+                                            <li><a href="/history">Lịch sử giao dịch</a></li>
+                                            <li><a href="/member/logout/info-edit">Đăng xuất</a></li>
 
                                         </ul>
                                     @else
@@ -54,7 +51,7 @@
                                     @endif
 
 								</li>
-								<li class="{{SetActive(['cart*'])}}"><a href="/cart"><i class="icon-shopping-cart"></i> Giỏ hàng [0]</a></li>
+								<li class="{{SetActive(['cart*'])}}"><a href="/cart"><i class="icon-shopping-cart"></i> Giỏ hàng [{{ Cart::count() }}]</a></li>
 							</ul>
 						</div>
 					</div>
@@ -73,7 +70,7 @@
 										<div class="desc">
 											<h1 class="head-1">Sale</h1>
 											<h2 class="head-3">45%</h2>
-											<p class="category"><span>Nhưng mẫu thiết kế chuyên nghiệp</span></p>
+											<p class="category"><span>Mẫu thiết kế chuyên nghiệp</span></p>
 											<p><a href="#" class="btn btn-primary">Kết nối với shop</a></p>
 										</div>
 									</div>
@@ -90,7 +87,7 @@
 										<div class="desc">
 											<h1 class="head-1">Sale</h1>
 											<h2 class="head-3">45%</h2>
-											<p class="category"><span>Nhưng mẫu thiết kế chuyên nghiệp</span></p>
+											<p class="category"><span>Mẫu thiết kế chuyên nghiệp</span></p>
 											<p><a href="#" class="btn btn-primary">Kết nối với shop</a></p>
 										</div>
 									</div>
@@ -107,7 +104,7 @@
 										<div class="desc">
 											<h1 class="head-1">Sale</h1>
 											<h2 class="head-3">45%</h2>
-											<p class="category"><span>Nhưng mẫu thiết kế chuyên nghiệp</span></p>
+											<p class="category"><span>Mẫu thiết kế chuyên nghiệp</span></p>
 											<p><a href="#" class="btn btn-primary">Kết nối với shop</a></p>
 										</div>
 									</div>

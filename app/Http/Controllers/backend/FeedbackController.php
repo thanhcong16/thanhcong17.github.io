@@ -28,7 +28,6 @@ class FeedbackController extends Controller
         {
             $fb->FeedStatus=0;
             $fb->save();
-
             return redirect()->back()->with('thongbao','Phản hồi đã được ẩn trên website.');
         }
     }

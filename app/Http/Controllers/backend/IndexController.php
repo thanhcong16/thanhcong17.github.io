@@ -13,6 +13,7 @@ class IndexController extends Controller
 {
     function GetIndex(){
         $month_now=Carbon::now()->format('m');
+        $sumAll=0;
         $year_now=Carbon::now()->format('Y');
         for($i=1; $i <=$month_now ; $i++)
         {
@@ -22,10 +23,12 @@ class IndexController extends Controller
             ->select(DB::raw('sum(products.ProPrice * order_product.OrdQuantity) as total'))
             ->where('orders.OrderStatus',1)
             ->whereMonth('orders.updated_at',$i)->whereYear('orders.updated_at',$year_now)
-            ->value('total');;
+            ->value('total');
+            $sumAll=$sumAll + $dl['Tháng '.$i];
         }
         $data['number']=orders::Where('OrderStatus',0)->count();
         $data['paid']=orders::Where('OrderStatus',1)->count();
+        $data['sumAll']=$sumAll;
 
         $data['dl']=$dl;
         return view("backend.index",$data);

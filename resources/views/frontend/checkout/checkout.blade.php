@@ -1,7 +1,7 @@
 @extends('frontend.master.master')
 @section('title','Trang thanh toán')
 @section('content')
-	
+
 	<!-- main -->
 
 	<div class="colorlib-shop">
@@ -25,69 +25,76 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-7">
-							<form method="post" class="colorlib-form">
+                    <form method="post" class="colorlib-form">
+                        @csrf
+					    <div class="col-md-7">
+
 							<h2>Chi tiết thanh toán</h2>
 							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="fname">Họ & Tên</label>
-										<input type="text" name="full" class="form-control" placeholder="Full Name">
+								<div class="form-group">
+									<div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="fname">Họ & Tên</label>
+                                            <input type="text" name="fullname" class="form-control" placeholder="Full Name">
+                                            {!! ShowError($errors,"fullname") !!}
+                                        </div>
+                                    </div>
+									<div class="col-md-6">
+										<label for="Phone">Số điện thoại</label>
+										<input type="text" name="phone" class="form-control"
+                                            placeholder="Ex: 0123456789">
+                                            {!! ShowError($errors,"phone") !!}
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
 										<label for="fname">Địa chỉ</label>
 										<input type="text" name="address" class="form-control"
-											placeholder="Nhập địa chỉ của bạn">
+                                            placeholder="Nhập địa chỉ của bạn">
+                                            {!! ShowError($errors,"address") !!}
 									</div>
 								</div>
 
-								<div class="form-group">
-									<div class="col-md-6">
-										<label for="email">Địa chỉ email</label>
-										<input type="email" name="email" class="form-control"
-											placeholder="Ex: youremail@domain.com">
-									</div>
-									<div class="col-md-6">
-										<label for="Phone">Số điện thoại</label>
-										<input type="text" name="phone" class="form-control"
-											placeholder="Ex: 0123456789">
-									</div>
-								</div>
+
 								<div class="form-group">
 									<div class="col-md-12">
-
+                                        <label for="">Phương thức thanh toán</label><br>
+                                        <label style="color:rgb(46, 74, 201)" for="radio-label">
+                                            <input type="radio" name="paymenMethod" value="1"  checked autocomplete="off">Thanh toán khi nhận hàng
+                                        </label>
 									</div>
 								</div>
 							</div>
-						
-					</div>
-					<div class="col-md-5">
-						<div class="cart-detail">
-							<h2>Tổng Giỏ hàng</h2>
-							<ul>
-								<li>
 
-									<ul>
-										<li><span>1 x Tên sản phẩm</span> <span>₫ 990.000</span></li>
-										<li><span>1 x Tên sản phẩm</span> <span>₫ 780.000</span></li>
-									</ul>
-								</li>
+					    </div>
+                        <div class="col-md-5">
+                            <div class="cart-detail">
+                                <h2>Tổng Giỏ hàng</h2>
+                                <ul>
+                                    <li>
 
-								<li><span>Tổng tiền đơn hàng</span> <span>₫ 1.370.000</span></li>
-							</ul>
-						</div>
+                                        <ul>
+                                            @foreach ($cart as $item)
+                                                <li>
+                                                    <span>{{ $item->qty }} x {{ $item->name }} - {{ $item->options->size }}</span>
+                                                    <span>{{ number_format( $item->price ,0,"",",") }} ₫</span></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
 
-						<div class="row">
-							<div class="col-md-12">
-								<p><button type="submit" class="btn btn-primary">Thanh toán</button></p>
-							</div>
-						</div>
-					</div>
-				</form>
-				</div>
+                                    <li><span>Tổng tiền đơn hàng</span> <span>{{ $total }} ₫</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p><button type="submit" class="btn btn-primary">Thanh toán</button></p>
+                                </div>
+                            </div>
+                        </div>
+				    </form>
 			</div>
+		</div>
 	</div>
 	<!-- end main -->
 @endsection
@@ -130,4 +137,3 @@
 	</script>
 
 @endsection
-		

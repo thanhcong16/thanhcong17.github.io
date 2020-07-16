@@ -10,27 +10,43 @@
 							<div class="row">
 								<div class="col-md-5">
 									<div class="product-entry">
-										<div class="product-img" style="background-image: url(images/ao-so-mi-trang-kem-asm836-8193.jpg);">
+										<div class="product-img" style="background-image: url(/backend/img/{{$prd->ProImg}});">
 
 										</div>
 
 									</div>
 								</div>
 								<div class="col-md-7">
-									<form action="product/AddCart" method="post">
+									<form action="/cart/add" method="get">
 
 										<div class="desc">
-											<h3>Áo Sơ Mi Trắng Kem ASM844</h3>
-											<p class="price">
-												<span>150,000 đ</span>
-											</p>
-											<p>thông tin</p>
-											<p style="text-align: justify;">
-												VIETPRO STORE sẽ giao hàng tận nơi khi chọn mua sản phẩm: Áo Sơ Mi Trắng Kem ASM844. Hoặc quí khách có thể đến tại địa chỉ shop có hiển thị bên dưới, khi chọn size phù hợp để xem và thử trực tiếp.
+                                            <h3>{{ $prd->ProName }}</h3>
+											<span>Mã sản phẩm: </span><b style="color: #252a2b">{{ $prd->ProCode}}</b>
 
-											</p>
-										
-									
+											<p class="price">
+												<span>{{ number_format($prd->ProPrice,0,"",",") }} đ</span>
+                                            </p>
+											<p>THÔNG TIN</p>
+											<p style="text-align: justify;">
+												{{ $prd->ProInfo}}
+
+                                            </p>
+                                            <p>Kích thước sản phẩm hiện còn</p>
+
+                                                <div class="btn-group" data-toggle="buttons">
+                                                    @foreach ($prd_size as $row)
+                                                    <label class="btn btn-primary size">{{$row->SizeType}}
+                                                        <input type="radio" name="size" value="{{$row->SizeType}}" autocomplete="off">
+
+                                                    </label>
+                                                    @endforeach
+                                                    {!! ShowError($errors,'size') !!}
+
+                                                </div>
+
+                                            <p>Số lượng</p>
+
+
 											<div class="row row-pb-sm">
 												<div class="col-md-4">
 													<div class="input-group">
@@ -48,7 +64,7 @@
 													</div>
 												</div>
 											</div>
-											<input type="hidden" name="id_product" value="1">
+											<input type="hidden" name="id_product" value="{{ $prd->ProID }}">
 											<p><button class="btn btn-primary btn-addtocart" type="submit"> Thêm vào giỏ hàng</button></p>
 										</div>
 									</form>
@@ -57,22 +73,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-10 col-md-offset-1">
-						<div class="row">
-							<div class="col-md-12 tabulation">
-								<ul class="nav nav-tabs">
-									<li class="active"><a data-toggle="tab" href="#description">Mô tả</a></li>
-								</ul>
-								<div class="tab-content">
-									<div id="description" class="tab-pane fade in active">
-										Đây là sản phẩm đẹp
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+
 			</div>
 	</div>
 
@@ -84,84 +85,27 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-3 text-center">
-						<div class="product-entry">
-							<div class="product-img" style="background-image: url(images/quan-kaki-xanh-den-qk171-9771.jpg);">
-								<div class="cart">
-									<p>
-										<span class="addtocart"><a href="cart.html"><i
-													class="icon-shopping-cart"></i></a></span>
-										<span><a href="detail.html"><i class="icon-eye"></i></a></span>
+					@foreach ($prd_new as $row)
+                        <div class="col-md-3 text-center">
+                            <div class="product-entry">
+                                <div class="product-img" style="background-image: url(/backend/img/{{$row->ProImg}});">
+                                    <div class="cart">
+                                        <p>
+
+                                            <span><a href="/product/{{ $row->ProSlug }}.html"><i class="icon-eye"></i></a></span>
 
 
-									</p>
-								</div>
-							</div>
-							<div class="desc">
-								<h3><a href="detail.html">Quần kaki xanh đen</a></h3>
-								<p class="price"><span>3.000.000 đ</span></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 text-center">
-						<div class="product-entry">
-							<div class="product-img" style="background-image: url(images/ao-so-mi-trang-kem-asm836-8193.jpg);">
-								<div class="cart">
-									<p>
-										<span class="addtocart"><a href="cart.html"><i
-													class="icon-shopping-cart"></i></a></span>
-										<span><a href="detail.html"><i class="icon-eye"></i></a></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="desc">
+                                    <h3><a href="/product/{{ $row->ProSlug }}.html">{{$row->ProName}}</a></h3>
+                                    <p class="price"><span>{{ number_format($row->ProPrice,0,"",",")}} đ</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
 
-
-									</p>
-								</div>
-							</div>
-							<div class="desc">
-								<h3><a href="detail.html">Áo trắng kẻ vằn</a></h3>
-								<p class="price"><span>3.000.000 đ</span></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 text-center">
-						<div class="product-entry">
-							<div class="product-img" style="background-image: url(images/6ds19c007.jpg);">
-
-								<div class="cart">
-									<p>
-										<span class="addtocart"><a href="cart.html"><i
-													class="icon-shopping-cart"></i></a></span>
-										<span><a href="detail.html"><i class="icon-eye"></i></a></span>
-
-
-									</p>
-								</div>
-							</div>
-							<div class="desc">
-								<h3><a href="detail.html">Áo nữ trắng bạch</a></h3>
-								<p class="price"><span>3.000.000 đ</span></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 text-center">
-						<div class="product-entry">
-							<div class="product-img" style="background-image: url(images/ao-nu-so-mi-co-co-duc.jpg);">
-
-								<div class="cart">
-									<p>
-										<span class="addtocart"><a href="cart.html"><i
-													class="icon-shopping-cart"></i></a></span>
-										<span><a href="detail.html"><i class="icon-eye"></i></a></span>
-
-
-									</p>
-								</div>
-							</div>
-							<div class="desc">
-								<h3><a href="detail.html">Áo sơ mi có cổ kẻ ô xám</a></h3>
-								<p class="price"><span>3.000.000 đ</span></p>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 	</div>

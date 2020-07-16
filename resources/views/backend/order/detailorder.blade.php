@@ -62,6 +62,7 @@
 													<div class="col-md-8">
 														<p><b>Mã sản phẩm</b>: {{ $prd->ProCode }}</p>
 														<p><b>Tên Sản phẩm</b>: {{ $prd->ProName }}</p>
+														<p><b>Size</b>: {{ $prd->pivot->OrdSize }}</p>
 														<p><b>Số lương</b> : {{ $prd->pivot->OrdQuantity }}</p>
 													</div>
 												</div>

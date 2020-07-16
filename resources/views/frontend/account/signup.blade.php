@@ -13,7 +13,7 @@
                                 <strong>{{ session('thongbao')}}</strong>
                                 </div>
                             @endif
-                            <div class="panel-heading">Đăng kí tài khoản</div>
+                            <div class="panel-name">Đăng kí tài khoản</div>
                             <div class="panel-body">
                                 <form role="form" method="post">
                                     @csrf

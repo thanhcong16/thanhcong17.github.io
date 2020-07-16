@@ -12,13 +12,15 @@ use Illuminate\Support\Facades\Hash;
 
 class MemberController extends Controller
 {
-    function GetMember($id_user)
+    function GetMember($info)
     {
+        $id_user=session()->get($info);
         $data['user']=User::find($id_user);
         return view('frontend.member.editmember',$data);
     }
-    function PostEditMember(EditMemberRequest $r,$id_user)
+    function PostEditMember(EditMemberRequest $r,$info)
     {
+        $id_user=session()->get($info);
         $user=User::find($id_user);
         $user->email=$r->email;
         $user->fullname=$r->fullname;
@@ -33,8 +35,9 @@ class MemberController extends Controller
     {
         return view('frontend.member.editpassword');
     }
-    function PostEditPassword(EditPasswordRequest $r,$id_user)
+    function PostEditPassword(EditPasswordRequest $r,$info)
     {
+        $id_user=session()->get($info);
         $user = User::find($id_user);
         if(Hash::check($r->password1,$user->password) && $r->password2==$r->password3 && $r->password1!=$r->password2)
         {

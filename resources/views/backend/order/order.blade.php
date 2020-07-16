@@ -21,7 +21,13 @@
 					<div class="panel-body">
 						<div class="bootstrap-table">
 							<div class="table-responsive">
-
+                                @if (session('thongbao'))
+                                    <div class="alert bg-success" role="alert">
+                                        <svg class="glyph stroked checkmark">
+                                            <use xlink:href="#stroked-checkmark"></use>
+                                        </svg>{{ session('thongbao') }}<a href="/admin/order" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                    </div>
+                                @endif
 								<a href="/admin/order/processed" class="btn btn-success">Đơn đã xử lý</a>
 								<table class="table table-bordered" style="margin-top:20px;">
 									<thead>
@@ -31,7 +37,7 @@
 											<th>Sđt</th>
 											<th>Địa chỉ</th>
 
-											<th>Xử lý</th>
+											<th width='18%'>Xử lý</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -43,6 +49,7 @@
                                                 <td>{{ $row->OrderAddress }}</td>
                                                 <td>
                                                     <a href="/admin/order/detail/{{ $row->OrderID}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Xử lý</a>
+                                                    <a onclick="return Del_Order('{{$row->OrderCustomer}}')" href="/admin/order/del/{{ $row->OrderID}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Xóa</a>
 
                                                 </td>
                                             </tr>
@@ -67,4 +74,14 @@
 
 	</div>
 	<!--end main-->
+@endsection
+
+@section('script')
+@parent
+    <script>
+        function Del_Order($name)
+        {
+            return confirm("Bạn có muốn xóa đơn của khách hàng "+ $name + " ko?");
+        }
+    </script>
 @endsection

@@ -39,4 +39,9 @@ class OrderController extends Controller
         $data['orders']=orders::where('OrderStatus',1)->orderBy('OrderID', 'desc')->paginate(4);
         return view("backend.order.processed",$data);
     }
+    function DelOrder($id_order)
+    {
+        orders::destroy($id_order);
+        return redirect('admin/order')->with('thongbao','Đã xóa thành công đơn hàng chưa xử lí!');
+    }
 }

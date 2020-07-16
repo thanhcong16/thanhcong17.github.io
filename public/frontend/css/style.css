@@ -32,6 +32,20 @@ body {
     transition: 0.5s;
 }
 
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+}
+
 .offcanvas #page {
     overflow: hidden;
     position: absolute;
@@ -1790,6 +1804,14 @@ figure {
     margin-bottom: 0;
 }
 
+.panel-name {
+    padding: 10px;
+    font-size: 25px;
+    color: orangered;
+    text-shadow: 1px 1px 1px grey;
+    font-weight: bold;
+}
+
 .colorlib-form {
     background: whitesmoke;
     padding: 2em;
@@ -2984,3 +3006,66 @@ input[type="text"] {
 .js .animate-box {
     opacity: 0;
 }
+
+
+/* Clients-banner */
+
+.banner-5 h3.text-center {
+    color: #333;
+    font-size: 3.5em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+    letter-spacing: 1px;
+}
+
+.banner-5 h2.text-center {
+    font-size: 1.3em;
+    color: #ffc107;
+    letter-spacing: 2px;
+}
+
+.khung-talk p.card-text {
+    color: #6f6b6b;
+    margin-top: .5em;
+}
+
+.khung-talk h3.card-text {
+    color: #ec1c24;
+    font-size: 1em;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+p.noi.p-3 {
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.khung-talk .talk {
+    background-color: #3b3e40;
+    position: relative;
+}
+
+img.khach {
+    border-radius: 50%;
+}
+
+.khung-talk .talk .tamgiac {
+    position: absolute;
+    top: 100%;
+    left: 14%;
+    width: 0;
+    height: 0;
+    border-top: 15px solid rgb(158, 159, 160);
+    border-right: 4px solid transparent;
+    border-left: 12px solid transparent;
+    transform: rotate(0deg);
+}
+
+h3.card-text {
+    margin-top: 10px;
+}
+
+
+/* Clients-banner */

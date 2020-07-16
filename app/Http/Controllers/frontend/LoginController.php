@@ -19,9 +19,14 @@ class LoginController extends Controller
         $password=$r->password;
 
         if(Auth::attempt(['email' => $email, 'password' => $password, 'level'=>1])){
+            session()->put('info-edit',Auth::User()->id);
+
             return redirect('/');
         }
         if(Auth::attempt(['email' => $email, 'password' => $password, 'level'=>2])){
+            session()->put('info-edit',Auth::User()->id);
+
+
             return redirect('admin');
         }
         return redirect()->back()->with('thongbao','Tài khoản hoặc mật khẩu không đúng')->withInput();

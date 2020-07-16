@@ -13,7 +13,7 @@
                                     <strong>{{ session('thongbao')}}</strong>
                                 </div>
                             @endif
-                            <div class="panel-heading">Thông tin tài khoản</div>
+                            <div class="panel-name">Thông tin tài khoản</div>
                             <div class="panel-body">
                                 <form role="form" method="POST">
                                     @csrf
@@ -44,6 +44,7 @@
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">Thay đổi thông tin</button>
+                                        <a href="/" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Hủy</a>
 
 
                                     </fieldset>

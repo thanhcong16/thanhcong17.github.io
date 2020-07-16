@@ -22,6 +22,7 @@ class CreateOrderProductTable extends Migration
             //tạo liên kết đến bảng products
             $table->foreign('ProID')->references('ProID')->on('products')->onDelete('cascade');
             $table->integer('OrdQuantity')->unsigned();
+            $table->string('OrdSize');
 
             $table->timestamps();
         });

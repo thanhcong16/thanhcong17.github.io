@@ -18,7 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 // front-end
     Route::get('', 'frontend\IndexController@GetIndex');
-    Route::get('contact', 'frontend\IndexController@GetContact');
+    Route::get('contact', 'frontend\IndexController@GetContact')->middleware('CheckLoginMember');
+    Route::post('contact', 'frontend\IndexController@PostContact');
+
+    Route::get('{slug_cate}.html', 'frontend\IndexController@GetPrdCate');
+    Route::get('fillter', 'frontend\IndexController@GetFillter');
 
     ////đăng nhập
     Route::get('login', 'frontend\LoginController@GetLogin')->middleware('CheckLogout');
@@ -27,13 +31,13 @@ use Illuminate\Support\Facades\Route;
 
     ////Thành viên
     Route::group(['prefix' => 'member', 'middleware'=>'CheckLoginMember' ], function () {
-        Route::get('/{id_user}', 'frontend\MemberController@GetMember' );
-        Route::post('/{id_user}', 'frontend\MemberController@PostEditMember' );
+        Route::get('/{info}', 'frontend\MemberController@GetMember' );
+        Route::post('/{info}', 'frontend\MemberController@PostEditMember' );
 
-        Route::get('editpassword/{id_user}', 'frontend\MemberController@GetPassword' );
-        Route::post('editpassword/{id_user}', 'frontend\MemberController@PostEditPassword' );
+        Route::get('editpassword/{info}', 'frontend\MemberController@GetPassword' );
+        Route::post('editpassword/{info}', 'frontend\MemberController@PostEditPassword' );
 
-        Route::get('logout/{id_user}', 'frontend\IndexController@GetLogout' );
+        Route::get('logout/{info}', 'frontend\IndexController@GetLogout' );
 
     });
     ////Thành viên
@@ -49,15 +53,16 @@ use Illuminate\Support\Facades\Route;
 
     ////Sản phẩm
     Route::group(['prefix' => 'product'], function () {
-        Route::get('detail', 'frontend\ProductController@GetDetail');
+        Route::get('{slug_prd}.html', 'frontend\ProductController@GetDetail');
         Route::get('', 'frontend\ProductController@GetShop');
     });
     ////Sản phẩm
 
     ////Thanh toán
     Route::group(['prefix' => 'checkout',], function () {
-        Route::get('', 'frontend\CheckOutController@GetCheckout');
-        Route::get('complete', 'frontend\CheckOutController@GetComplete')->middleware('CheckLoginMember');
+        Route::get('', 'frontend\CheckOutController@GetCheckout')->middleware('CheckLoginMember');
+        Route::post('', 'frontend\CheckOutController@PostCheckout');
+        Route::get('complete/{order}', 'frontend\CheckOutController@GetComplete')->middleware('CheckLoginMember');
 
     });
     ////Thanh toán
@@ -65,15 +70,26 @@ use Illuminate\Support\Facades\Route;
     ////Giỏ hàng
     Route::group(['prefix' => 'cart'], function () {
         Route::get('', 'frontend\CartController@GetCart');
+        Route::get('add', 'frontend\CartController@AddCart');
+        Route::get('update/{rowId}/{qty}', 'frontend\CartController@UpdateCart');
+        Route::get('del/{rowId}', 'frontend\CartController@DelCart');
     });
     ////Giỏ hàng
 
 
-
+    ////errors
     Route::group(['prefix' => 'errors'],function(){
         Route::get('', 'ErrorsController@GetErrors');
     });
 
+    ////lịch sử giao dịch
+    Route::group(['prefix' => 'history'],function(){
+        Route::get('', 'frontend\HistoryController@GetExchange');
+        Route::get('del/{id_order}', 'frontend\HistoryController@DelOrder');
+
+        Route::get('/detail-product/{id_order}', 'frontend\HistoryController@GetDetail');
+
+    });
 //front-end
 
 //back-end
@@ -112,6 +128,8 @@ use Illuminate\Support\Facades\Route;
 
             Route::get('', 'backend\OrderController@GetOrder');
             Route::get('processed', 'backend\OrderController@GetProcessed');
+            Route::get('del/{id_order}', 'backend\OrderController@DelOrder');
+
         });
         //category
         Route::group(['prefix' => 'category'], function () {

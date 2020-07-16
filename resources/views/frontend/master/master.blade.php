@@ -32,7 +32,7 @@
 	<!--header -->
 	@include('frontend.master.header')
 		<!-- End header -->
-	
+
 		<!-- main -->
 		@yield('content')
 		<!-- end main -->
@@ -66,11 +66,11 @@
 		<!--end  subscribe -->
 		<!-- footer -->
 		@include('frontend.master.footer')
-		
+
 		<!--end  footer -->
 	</div>
 
-    
+
     @section('script')
         <!-- jQuery -->
     <script src="js/jquery.min.js"></script>

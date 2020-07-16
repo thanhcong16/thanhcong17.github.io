@@ -24,16 +24,23 @@
 			<div class="col-xs-12 col-md-12 col-lg-6">
 				<div class="panel panel-blue panel-widget ">
 					<div class="row no-padding">
-						<div class="col-sm-3 col-lg-4 widget-left">
+						<div class="col-sm-4 col-lg-4 widget-left">
 							<span class="glyphicon glyphicon-signal icon-50" aria-hidden="true"></span>
 						</div>
-						<div class="col-sm-9 col-lg-8 widget-right">
+						<div class="col-sm-4 col-lg-4 widget-right">
 							<div class="large">{{ number_format($dl['Tháng '.count($dl)],0,"",",") }} đ</div>
 							<div class="text-muted">Doanh thu tháng {{ count($dl) }}</div>
-						</div>
+                        </div>
+                        <div class="col-sm-4 col-lg-4 widget-right">
+							<div class="large">{{ number_format($sumAll,0,"",",") }} đ</div>
+							<div class="text-muted">Tổng doanh thu hiện tại</div>
+                        </div>
+
+
 					</div>
 				</div>
-			</div>
+            </div>
+
 
 			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="panel panel-teal panel-widget">

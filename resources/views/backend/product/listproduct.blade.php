@@ -62,7 +62,7 @@
                                                             <p>Tên sản phẩm :{{$row->ProName}}</p>
                                                             <p>Size :
                                                                 @foreach ($row->size as $comment)
-                                                                    -{{$comment->SizeType}}-
+                                                                    {{$comment->SizeType}}
                                                                 @endforeach
                                                             </p>
 

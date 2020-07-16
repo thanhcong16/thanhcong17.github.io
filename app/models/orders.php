@@ -11,7 +11,7 @@ class orders extends Model
     protected $primaryKey = 'OrderID';
     public function products()
     {
-        return $this->belongsToMany('App\models\products', 'order_product', 'OrderID', 'ProID')->withPivot('OrdQuantity');
+        return $this->belongsToMany('App\models\products', 'order_product', 'OrderID', 'ProID')->withPivot(['OrdQuantity','OrdSize'])->withTrashed();
     }
     public function order_product()
     {
