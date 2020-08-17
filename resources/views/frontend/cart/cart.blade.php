@@ -95,7 +95,12 @@
 										</div>
 										<div class="grand-total">
 											<p><span><strong>Tổng cộng:</strong></span> <span>{{$total}} đ</span></p>
-											<a href="/checkout" class="btn btn-primary">Tiến hành đặt hàng <i
+                                            <a
+                                             href="@if (Cart::count() > 0)
+                                                 /checkout
+                                                 @else
+                                                 /
+                                             @endif" class="btn btn-primary">Tiến hành đặt hàng <i
 													class="icon-arrow-right-circle"></i></a>
 										</div>
 									</div>
